@@ -7,12 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
-class SimpleCalc{
+class CountOnMe{
     
     func calculate(temporaryArrayElements: [String]) -> [String]{
         
         var operationsToReduce = temporaryArrayElements
+//        var elements: [Any]
+        
+        enum operand{
+            case null
+            case addition
+            case multiplication
+            case division
+            case subtraction
+            }
         
         while operationsToReduce.count > 1 {
             let left = Int(operationsToReduce[0])!
@@ -33,5 +43,21 @@ class SimpleCalc{
             
         }
         return operationsToReduce
+    }
+    // Error check computed variables
+    func expressionIsCorrect(elements: [String])-> Bool {
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
+    }
+
+    func expressionHaveEnoughElement(elements: [String])-> Bool {
+        return elements.count >= 3
+    }
+
+    func canAddOperator(elements: [String])-> Bool {
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
+    }
+
+    func expressionHaveResult(textviewtext: String)-> Bool {
+        return textviewtext.firstIndex(of: "=") != nil
     }
 }
